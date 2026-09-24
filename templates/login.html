@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Sign in — {{ app_name }}{% endblock %}
+
+{% block public_content %}
+<div class="auth-wrap">
+  <div class="auth-card">
+    <h1>Sign in</h1>
+    <p>Pick up where you left off and review your past consultations.</p>
+
+    {% include "_flashes.html" %}
+
+    <form method="post" novalidate>
+      {{ form.hidden_tag() }}
+
+      <div class="field">
+        {{ form.email.label }}
+        {{ form.email(placeholder="you@example.com", autocomplete="email", autofocus=true) }}
+        {% for e in form.email.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+      </div>
+
+      <div class="field">
+        {{ form.password.label }}
+        {{ form.password(autocomplete="current-password") }}
+        {% for e in form.password.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+      </div>
+
+      <div class="field checkbox">
+        {{ form.remember() }} {{ form.remember.label }}
+      </div>
+
+      {{ form.submit(class="btn btn-primary btn-lg", style="width:100%") }}
+    </form>
+
+    <p class="auth-foot">
+      No account yet? <a href="{{ url_for('register') }}">Create one</a>
+    </p>
+  </div>
+</div>
+{% endblock %}
+
+{% block public_flashes %}{% endblock %}

@@ -1,0 +1,477 @@
+{
+  "influenza": {
+    "name": "Influenza (Seasonal Flu)",
+    "description": "A viral infection of the respiratory tract that usually starts abruptly with fever and body aches.",
+    "symptoms": {
+      "fever": 1.0,
+      "chills": 1.2,
+      "headache": 0.8,
+      "cough": 0.9,
+      "sore throat": 0.8,
+      "body pain": 1.3,
+      "fatigue": 0.7,
+      "runny nose": 0.7,
+      "loss of appetite": 0.6
+    },
+    "department": "General Medicine",
+    "typical_duration": "5 to 7 days",
+    "self_limiting": true
+  },
+  "common_cold": {
+    "name": "Common Cold",
+    "description": "A mild viral infection of the nose and throat. It clears on its own and mainly needs rest and fluids.",
+    "symptoms": {
+      "runny nose": 1.4,
+      "sneezing": 1.5,
+      "sore throat": 1.0,
+      "cough": 0.8,
+      "nasal congestion": 1.3,
+      "mild fever": 0.8,
+      "headache": 0.5,
+      "fatigue": 0.5
+    },
+    "department": "General Medicine",
+    "typical_duration": "3 to 7 days",
+    "self_limiting": true
+  },
+  "covid19": {
+    "name": "COVID-19 (suspected)",
+    "description": "A viral respiratory illness. Loss of smell or taste alongside fever and cough makes it more likely.",
+    "symptoms": {
+      "fever": 1.0,
+      "dry cough": 1.2,
+      "loss of smell": 2.0,
+      "loss of taste": 2.0,
+      "fatigue": 0.7,
+      "breathlessness": 1.4,
+      "sore throat": 0.6,
+      "body pain": 0.7,
+      "headache": 0.5
+    },
+    "department": "General Medicine",
+    "typical_duration": "7 to 14 days",
+    "self_limiting": false
+  },
+  "dengue": {
+    "name": "Dengue Fever",
+    "description": "A mosquito-borne viral fever marked by very high fever, severe joint pain and a skin rash.",
+    "symptoms": {
+      "high fever": 1.5,
+      "severe headache": 1.2,
+      "joint pain": 1.6,
+      "muscle pain": 1.2,
+      "rash": 1.5,
+      "pain behind eyes": 2.0,
+      "nausea": 0.7,
+      "vomiting": 0.7,
+      "fatigue": 0.5,
+      "bleeding gums": 1.8
+    },
+    "department": "General Medicine",
+    "typical_duration": "7 to 10 days",
+    "self_limiting": false
+  },
+  "typhoid": {
+    "name": "Typhoid Fever",
+    "description": "A bacterial infection from contaminated food or water, causing a fever that climbs steadily over days.",
+    "symptoms": {
+      "prolonged fever": 1.8,
+      "abdominal pain": 1.2,
+      "constipation": 1.0,
+      "diarrhea": 0.9,
+      "weakness": 0.9,
+      "loss of appetite": 1.0,
+      "headache": 0.6,
+      "rash": 0.8,
+      "vomiting": 0.6
+    },
+    "department": "General Medicine",
+    "typical_duration": "2 to 4 weeks",
+    "self_limiting": false
+  },
+  "malaria": {
+    "name": "Malaria",
+    "description": "A mosquito-borne parasitic infection with fever that comes in cycles of chills, heat and sweating.",
+    "symptoms": {
+      "fever": 1.0,
+      "chills": 1.6,
+      "sweating": 1.5,
+      "headache": 0.7,
+      "nausea": 0.7,
+      "vomiting": 0.7,
+      "muscle pain": 0.8,
+      "fatigue": 0.6,
+      "anemia": 1.2
+    },
+    "department": "General Medicine",
+    "typical_duration": "Until treated",
+    "self_limiting": false
+  },
+  "gastroenteritis": {
+    "name": "Gastroenteritis (Stomach Flu)",
+    "description": "Inflammation of the stomach and intestines, usually from infected food or water.",
+    "symptoms": {
+      "diarrhea": 1.6,
+      "vomiting": 1.4,
+      "abdominal pain": 1.1,
+      "nausea": 1.0,
+      "mild fever": 0.6,
+      "dehydration": 1.2,
+      "loss of appetite": 0.6,
+      "stomach cramps": 1.3
+    },
+    "department": "Gastroenterology",
+    "typical_duration": "2 to 5 days",
+    "self_limiting": true
+  },
+  "migraine": {
+    "name": "Migraine",
+    "description": "A recurring headache disorder, often one-sided and throbbing, worsened by light and sound.",
+    "symptoms": {
+      "severe headache": 1.4,
+      "throbbing pain": 1.6,
+      "sensitivity to light": 2.0,
+      "sensitivity to sound": 1.8,
+      "nausea": 0.9,
+      "vomiting": 0.7,
+      "blurred vision": 1.2,
+      "aura": 2.0,
+      "dizziness": 0.7
+    },
+    "department": "Neurology",
+    "typical_duration": "4 to 72 hours per episode",
+    "self_limiting": true
+  },
+  "tension_headache": {
+    "name": "Tension-Type Headache",
+    "description": "A dull, pressing headache on both sides of the head, commonly linked to stress or screen strain.",
+    "symptoms": {
+      "headache": 1.4,
+      "neck pain": 1.3,
+      "stress": 1.2,
+      "fatigue": 0.7,
+      "eye strain": 1.5,
+      "shoulder pain": 1.2,
+      "difficulty concentrating": 0.9
+    },
+    "department": "General Medicine",
+    "typical_duration": "30 minutes to a few hours",
+    "self_limiting": true
+  },
+  "allergic_rhinitis": {
+    "name": "Allergic Rhinitis",
+    "description": "An allergic reaction in the nose to dust, pollen or pets. It is not an infection.",
+    "symptoms": {
+      "sneezing": 1.6,
+      "runny nose": 1.3,
+      "itchy eyes": 1.9,
+      "watery eyes": 1.7,
+      "nasal congestion": 1.1,
+      "itchy throat": 1.5,
+      "cough": 0.5
+    },
+    "department": "ENT / Allergy",
+    "typical_duration": "As long as exposure continues",
+    "self_limiting": true
+  },
+  "asthma": {
+    "name": "Asthma",
+    "description": "A long-term condition where the airways narrow and swell, causing wheezing and breathlessness.",
+    "symptoms": {
+      "breathlessness": 1.5,
+      "wheezing": 2.0,
+      "chest tightness": 1.5,
+      "cough": 0.8,
+      "difficulty breathing": 1.6,
+      "night cough": 1.4
+    },
+    "department": "Pulmonology",
+    "typical_duration": "Chronic with flare-ups",
+    "self_limiting": false
+  },
+  "bronchitis": {
+    "name": "Acute Bronchitis",
+    "description": "Inflammation of the airways after an infection, leaving a cough that lingers for weeks.",
+    "symptoms": {
+      "persistent cough": 1.7,
+      "mucus": 1.5,
+      "chest discomfort": 1.2,
+      "mild fever": 0.7,
+      "fatigue": 0.6,
+      "breathlessness": 0.9,
+      "sore throat": 0.6
+    },
+    "department": "Pulmonology",
+    "typical_duration": "2 to 3 weeks",
+    "self_limiting": true
+  },
+  "pneumonia": {
+    "name": "Pneumonia",
+    "description": "An infection that inflames the air sacs of the lungs. It needs prompt medical assessment.",
+    "symptoms": {
+      "high fever": 1.2,
+      "cough": 0.9,
+      "mucus": 1.1,
+      "chest pain": 1.5,
+      "breathlessness": 1.5,
+      "chills": 1.1,
+      "rapid breathing": 1.6,
+      "fatigue": 0.6,
+      "confusion": 1.3
+    },
+    "department": "Pulmonology",
+    "typical_duration": "1 to 3 weeks with treatment",
+    "self_limiting": false
+  },
+  "sinusitis": {
+    "name": "Sinusitis",
+    "description": "Inflammation of the sinuses causing facial pressure and thick nasal discharge.",
+    "symptoms": {
+      "facial pain": 1.9,
+      "nasal congestion": 1.3,
+      "headache": 0.8,
+      "thick nasal discharge": 1.7,
+      "reduced smell": 1.3,
+      "toothache": 1.4,
+      "mild fever": 0.6,
+      "cough": 0.5
+    },
+    "department": "ENT / Allergy",
+    "typical_duration": "10 days to 4 weeks",
+    "self_limiting": true
+  },
+  "pharyngitis": {
+    "name": "Pharyngitis (Throat Infection)",
+    "description": "A sore, inflamed throat that makes swallowing painful, usually viral but sometimes bacterial.",
+    "symptoms": {
+      "sore throat": 1.8,
+      "difficulty swallowing": 1.7,
+      "swollen glands": 1.6,
+      "fever": 0.8,
+      "hoarse voice": 1.3,
+      "headache": 0.5,
+      "cough": 0.5
+    },
+    "department": "ENT / Allergy",
+    "typical_duration": "3 to 7 days",
+    "self_limiting": true
+  },
+  "gerd": {
+    "name": "Acid Reflux (GERD)",
+    "description": "Stomach acid flowing back into the food pipe, causing burning behind the breastbone.",
+    "symptoms": {
+      "heartburn": 2.0,
+      "acid reflux": 1.9,
+      "chest burning": 1.6,
+      "sour taste": 1.6,
+      "difficulty swallowing": 1.0,
+      "bloating": 1.0,
+      "nausea": 0.6,
+      "night cough": 1.0
+    },
+    "department": "Gastroenterology",
+    "typical_duration": "Recurring",
+    "self_limiting": false
+  },
+  "peptic_ulcer": {
+    "name": "Peptic Ulcer",
+    "description": "A sore in the stomach lining that causes gnawing upper abdominal pain, often between meals.",
+    "symptoms": {
+      "abdominal pain": 1.3,
+      "burning stomach pain": 1.9,
+      "bloating": 1.0,
+      "nausea": 0.7,
+      "loss of appetite": 0.9,
+      "heartburn": 1.1,
+      "weight loss": 1.2,
+      "black stools": 2.0
+    },
+    "department": "Gastroenterology",
+    "typical_duration": "Weeks with treatment",
+    "self_limiting": false
+  },
+  "urinary_tract_infection": {
+    "name": "Urinary Tract Infection",
+    "description": "A bacterial infection of the bladder or urinary tract causing burning and urgency when passing urine.",
+    "symptoms": {
+      "burning urination": 2.0,
+      "frequent urination": 1.7,
+      "cloudy urine": 1.7,
+      "pelvic pain": 1.4,
+      "urgency to urinate": 1.6,
+      "mild fever": 0.7,
+      "back pain": 0.9,
+      "blood in urine": 1.8
+    },
+    "department": "Urology",
+    "typical_duration": "3 to 7 days with treatment",
+    "self_limiting": false
+  },
+  "anemia": {
+    "name": "Anemia",
+    "description": "A shortage of healthy red blood cells, leaving the body short of oxygen and constantly tired.",
+    "symptoms": {
+      "fatigue": 1.0,
+      "weakness": 1.0,
+      "pale skin": 1.9,
+      "dizziness": 1.0,
+      "breathlessness": 0.9,
+      "cold hands": 1.5,
+      "brittle nails": 1.7,
+      "headache": 0.4,
+      "rapid heartbeat": 1.1
+    },
+    "department": "General Medicine",
+    "typical_duration": "Improves over months with treatment",
+    "self_limiting": false
+  },
+  "hypertension": {
+    "name": "High Blood Pressure",
+    "description": "Persistently raised blood pressure. It often has no symptoms and is found on measurement.",
+    "symptoms": {
+      "headache": 0.7,
+      "dizziness": 0.9,
+      "blurred vision": 1.1,
+      "nosebleed": 1.4,
+      "chest discomfort": 1.0,
+      "breathlessness": 0.8,
+      "rapid heartbeat": 1.0
+    },
+    "department": "Cardiology",
+    "typical_duration": "Chronic",
+    "self_limiting": false
+  },
+  "diabetes": {
+    "name": "Diabetes Mellitus (suspected)",
+    "description": "Raised blood sugar. Excess thirst, frequent urination and unexplained weight loss are classic signs.",
+    "symptoms": {
+      "excessive thirst": 2.0,
+      "frequent urination": 1.4,
+      "weight loss": 1.3,
+      "fatigue": 0.6,
+      "blurred vision": 1.0,
+      "slow healing wounds": 1.9,
+      "increased hunger": 1.6,
+      "tingling feet": 1.5
+    },
+    "department": "Endocrinology",
+    "typical_duration": "Chronic",
+    "self_limiting": false
+  },
+  "hypothyroidism": {
+    "name": "Hypothyroidism",
+    "description": "An underactive thyroid gland, slowing the body down and causing tiredness and weight gain.",
+    "symptoms": {
+      "fatigue": 0.8,
+      "weight gain": 1.7,
+      "cold intolerance": 1.9,
+      "dry skin": 1.4,
+      "hair loss": 1.4,
+      "constipation": 1.1,
+      "depression": 1.0,
+      "muscle weakness": 1.0,
+      "puffy face": 1.7
+    },
+    "department": "Endocrinology",
+    "typical_duration": "Chronic",
+    "self_limiting": false
+  },
+  "food_poisoning": {
+    "name": "Food Poisoning",
+    "description": "Illness from contaminated food, starting within hours of eating.",
+    "symptoms": {
+      "vomiting": 1.5,
+      "diarrhea": 1.4,
+      "stomach cramps": 1.4,
+      "nausea": 1.1,
+      "mild fever": 0.6,
+      "weakness": 0.7,
+      "dehydration": 1.1
+    },
+    "department": "Gastroenterology",
+    "typical_duration": "1 to 3 days",
+    "self_limiting": true
+  },
+  "conjunctivitis": {
+    "name": "Conjunctivitis (Pink Eye)",
+    "description": "Inflammation of the outer eye membrane, making the eye red, gritty and watery.",
+    "symptoms": {
+      "red eyes": 2.0,
+      "itchy eyes": 1.4,
+      "watery eyes": 1.4,
+      "eye discharge": 1.9,
+      "gritty eyes": 1.8,
+      "swollen eyelids": 1.6,
+      "sensitivity to light": 0.8
+    },
+    "department": "Ophthalmology",
+    "typical_duration": "5 to 10 days",
+    "self_limiting": true
+  },
+  "arthritis": {
+    "name": "Arthritis",
+    "description": "Inflammation of one or more joints causing pain and stiffness that is often worse in the morning.",
+    "symptoms": {
+      "joint pain": 1.2,
+      "joint stiffness": 1.9,
+      "joint swelling": 1.8,
+      "reduced mobility": 1.5,
+      "morning stiffness": 1.9,
+      "redness over joint": 1.5,
+      "fatigue": 0.5
+    },
+    "department": "Orthopedics",
+    "typical_duration": "Chronic",
+    "self_limiting": false
+  },
+  "anxiety": {
+    "name": "Anxiety",
+    "description": "Persistent worry with physical signs such as a racing heart, restlessness and poor sleep.",
+    "symptoms": {
+      "excessive worry": 2.0,
+      "restlessness": 1.6,
+      "rapid heartbeat": 1.1,
+      "difficulty sleeping": 1.2,
+      "difficulty concentrating": 1.1,
+      "sweating": 0.8,
+      "trembling": 1.5,
+      "fatigue": 0.5,
+      "chest tightness": 0.9
+    },
+    "department": "Psychiatry",
+    "typical_duration": "Varies",
+    "self_limiting": false
+  },
+  "chickenpox": {
+    "name": "Chickenpox",
+    "description": "A contagious viral infection producing an itchy rash that turns into fluid-filled blisters.",
+    "symptoms": {
+      "itchy rash": 1.9,
+      "blisters": 2.0,
+      "fever": 0.8,
+      "fatigue": 0.6,
+      "loss of appetite": 0.6,
+      "headache": 0.5,
+      "body pain": 0.6
+    },
+    "department": "Dermatology",
+    "typical_duration": "5 to 10 days",
+    "self_limiting": true
+  },
+  "vertigo": {
+    "name": "Vertigo",
+    "description": "A spinning sensation from an inner-ear problem, often triggered by head movement.",
+    "symptoms": {
+      "dizziness": 1.3,
+      "spinning sensation": 2.0,
+      "loss of balance": 1.7,
+      "nausea": 0.8,
+      "vomiting": 0.6,
+      "ringing in ears": 1.6,
+      "blurred vision": 0.8
+    },
+    "department": "ENT / Allergy",
+    "typical_duration": "Seconds to hours per episode",
+    "self_limiting": true
+  }
+}

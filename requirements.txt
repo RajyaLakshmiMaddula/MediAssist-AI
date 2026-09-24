@@ -1,0 +1,14 @@
+# MediAssist AI — Python dependencies
+# Install with:  pip install -r requirements.txt
+
+Flask==3.0.3
+Flask-SQLAlchemy==3.1.1
+Flask-Login==0.6.3
+Flask-WTF==1.2.1
+WTForms==3.1.2
+SQLAlchemy==2.0.30
+Werkzeug==3.0.3
+nltk==3.8.1
+reportlab==4.2.0
+python-dotenv==1.0.1
+email-validator==2.1.1

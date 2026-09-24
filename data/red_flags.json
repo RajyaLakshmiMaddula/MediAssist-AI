@@ -1,0 +1,123 @@
+{
+  "flags": [
+    {
+      "id": "cardiac",
+      "phrases": [
+        "crushing chest pain",
+        "chest pain spreading to arm",
+        "chest pain radiating",
+        "pain in left arm and chest",
+        "chest pain with sweating",
+        "pressure in chest and jaw pain",
+        "chest pain spreading to my arm",
+        "chest pain going to arm",
+        "chest pain and left arm pain",
+        "heaviness in chest with sweating",
+        "chest pain with breathlessness and sweating"
+      ],
+      "message": "Chest pain that spreads to the arm, jaw or back, especially with sweating or breathlessness, can be a heart attack."
+    },
+    {
+      "id": "stroke",
+      "phrases": [
+        "face drooping",
+        "slurred speech",
+        "sudden weakness on one side",
+        "one side of body numb",
+        "sudden vision loss",
+        "worst headache of my life",
+        "sudden severe headache",
+        "arm weakness on one side",
+        "suddenly cannot speak",
+        "sudden difficulty speaking",
+        "sudden weakness on right side",
+        "sudden weakness on left side",
+        "weakness on one side of the body",
+        "numbness on one side of the body",
+        "sudden numbness on one side",
+        "cannot move one side",
+        "side of the body numb",
+        "side of body has gone numb",
+        "arm and leg numb on one side"
+      ],
+      "message": "Sudden weakness on one side, drooping face, slurred speech or a sudden worst-ever headache can be a stroke. Time matters enormously here."
+    },
+    {
+      "id": "breathing",
+      "phrases": [
+        "cannot breathe",
+        "gasping for air",
+        "lips turning blue",
+        "blue lips",
+        "severe breathlessness",
+        "choking",
+        "struggling to breathe"
+      ],
+      "message": "Severe difficulty breathing or blue lips needs emergency oxygen and assessment."
+    },
+    {
+      "id": "consciousness",
+      "phrases": [
+        "unconscious",
+        "fainted",
+        "passed out",
+        "seizure",
+        "convulsions",
+        "not responding",
+        "unresponsive",
+        "having fits",
+        "seizure fits"
+      ],
+      "message": "Loss of consciousness, fainting or a seizure needs to be assessed in person straight away."
+    },
+    {
+      "id": "bleeding",
+      "phrases": [
+        "vomiting blood",
+        "coughing blood",
+        "coughing up blood",
+        "heavy bleeding",
+        "blood in vomit",
+        "uncontrolled bleeding",
+        "bleeding that will not stop"
+      ],
+      "message": "Bringing up blood or bleeding that will not stop needs emergency care."
+    },
+    {
+      "id": "meningitis",
+      "phrases": [
+        "stiff neck with fever",
+        "rash that does not fade",
+        "neck stiffness and fever",
+        "fever with stiff neck",
+        "light hurts eyes with stiff neck"
+      ],
+      "message": "Fever with a stiff neck, a rash that does not fade under pressure, or severe light sensitivity can indicate meningitis."
+    },
+    {
+      "id": "abdomen",
+      "phrases": [
+        "rigid abdomen",
+        "severe abdominal pain",
+        "cannot stand up from stomach pain",
+        "board like abdomen",
+        "unbearable stomach pain"
+      ],
+      "message": "Sudden severe abdominal pain with a rigid, board-like belly can be a surgical emergency."
+    },
+    {
+      "id": "self_harm",
+      "phrases": [
+        "want to end my life",
+        "kill myself",
+        "suicidal",
+        "end it all",
+        "harm myself",
+        "no reason to live",
+        "want to die"
+      ],
+      "message": "You deserve support from a real person right now, not a symptom checker.",
+      "support": true
+    }
+  ]
+}

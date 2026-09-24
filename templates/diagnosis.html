@@ -1,0 +1,321 @@
+{% extends "base.html" %}
+{% block title %}Result — {{ app_name }}{% endblock %}
+
+{% block content %}
+<div class="page-head">
+  <h1>Analysis result</h1>
+  <p>Reference {{ consultation.reference }} · {{ consultation.created_at.strftime('%d %B %Y, %H:%M') }}</p>
+</div>
+
+{# ── Emergency: nothing else is shown ────────────────────────────────── #}
+{% if result.status == 'emergency' %}
+  {% set support_flag = result.red_flags | selectattr('support') | list %}
+  <div class="banner banner-emergency">
+    <svg class="banner-icon" width="20" height="20" viewBox="0 0 16 16" fill="none"
+         stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+      <path d="M8 1.6 15 14H1z" stroke-linejoin="round"/><path d="M8 6.2v3.2M8 11.3v.5" stroke-linecap="round"/></svg>
+    <div>
+      {% if support_flag %}
+        <strong>Please talk to someone right now.</strong>
+        <p>What you wrote suggests you may be thinking about harming yourself. A symptom
+           checker is the wrong tool for this and I do not want to give you one. Please
+           contact a local crisis helpline, a doctor, or someone you trust today. In India
+           you can call Tele-MANAS on 14416 or AASRA on 9820466726, both free and available
+           around the clock. If you are elsewhere, your local emergency number will
+           connect you to help.</p>
+      {% else %}
+        <strong>Stop and get medical help now.</strong>
+        <p>Your description contains a warning sign that needs immediate in-person
+           assessment. No analysis has been run, because a confidence percentage is not a
+           useful answer to this. Call your local emergency number or go to the nearest
+           emergency department.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if not support_flag %}
+  <div class="card">
+    <h2>Why this was flagged</h2>
+    <ul class="plan-list warn">
+      {% for flag in result.red_flags %}
+        <li>{{ flag.message }}</li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <p style="margin-top:1.5rem">
+    <a class="btn btn-secondary" href="{{ url_for('dashboard') }}">Back to dashboard</a>
+  </p>
+
+{# ── Nothing recognised ──────────────────────────────────────────────── #}
+{% elif result.status in ['no_symptoms', 'no_match'] %}
+  <div class="banner banner-caution">
+    <svg class="banner-icon" width="18" height="18" viewBox="0 0 16 16" fill="none"
+         stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+      <circle cx="8" cy="8" r="6.6"/><path d="M8 4.6v4.2M8 11v.5" stroke-linecap="round"/></svg>
+    <div>
+      {% if result.status == 'no_symptoms' %}
+        <strong>No recognisable symptoms found.</strong>
+        <p>Nothing in your description matched a symptom this system knows. Try naming
+           what you feel and where — "burning pain in my upper stomach after meals" rather
+           than "I feel off". You can also check the
+           <a href="{{ url_for('conditions') }}">conditions covered</a>.</p>
+      {% else %}
+        <strong>No condition matched closely enough.</strong>
+        <p>Your symptoms were understood but none of the {{ result.candidates|length }}
+           conditions in the knowledge base fit well enough to report. This knowledge base
+           is small and deliberately conservative — a poor guess would be worse than none.
+           Please see a doctor for a proper assessment.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if result.symptoms %}
+  <div class="card">
+    <h2>What was understood</h2>
+    <ul class="chips">
+      {% for s in result.symptoms %}<li class="chip">{{ s }}</li>{% endfor %}
+      {% for s in result.denied %}<li class="chip chip-denied">{{ s }}</li>{% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <p style="margin-top:1.5rem">
+    <a class="btn btn-primary" href="{{ url_for('dashboard') }}">Try describing it differently</a>
+  </p>
+
+{# ── Normal result ───────────────────────────────────────────────────── #}
+{% else %}
+  {% set p = result.primary %}
+  {% set plan = result.plan %}
+
+  {% if result.certainty in ['weak', 'inconclusive'] %}
+  <div class="banner banner-caution">
+    <svg class="banner-icon" width="18" height="18" viewBox="0 0 16 16" fill="none"
+         stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+      <circle cx="8" cy="8" r="6.6"/><path d="M8 4.6v4.2M8 11v.5" stroke-linecap="round"/></svg>
+    <p><strong>Treat this result as a weak signal.</strong>
+       The top match is not clearly ahead of the alternatives, which usually means the
+       symptoms described are common to several conditions. Read the other candidates
+       below and do not settle on one without a doctor.</p>
+  </div>
+  {% endif %}
+
+  <div class="card">
+    <div class="verdict">
+      <div>
+        <div class="verdict-name">{{ p.name }}</div>
+        <p class="verdict-desc">{{ p.description }}</p>
+      </div>
+      <div class="dial dial--{{ result.certainty }}"
+           role="img"
+           aria-label="Symptom match {{ p.confidence|round|int }} percent, {{ result.certainty }} match">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="dial-track" cx="60" cy="60" r="52"/>
+          <circle class="dial-value" cx="60" cy="60" r="52"
+                  style="--pct: {{ p.confidence|round|int }}"/>
+        </svg>
+        <div class="dial-readout">
+          <span class="dial-pct">{{ p.confidence|round|int }}</span>
+          <span class="dial-unit">percent</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="dial-caption">
+      {{ {'strong':'Strong symptom match','moderate':'Moderate symptom match',
+          'weak':'Weak symptom match','inconclusive':'Unclear match'}[result.certainty] }} —
+      {{ p.matched|length }} of {{ p.total_symptoms }} typical signs of {{ p.name }} are present.
+      This is a similarity score, not a diagnosis.
+    </p>
+
+    <div class="form-row" style="margin-top:1.4rem;gap:1.4rem">
+      <div>
+        <div class="stat-label">Department to visit</div>
+        <div style="font-weight:500">{{ p.department }}</div>
+      </div>
+      <div>
+        <div class="stat-label">Severity assessed</div>
+        <div style="font-weight:500">{{ result.severity.level }}</div>
+      </div>
+      <div>
+        <div class="stat-label">Duration</div>
+        <div style="font-weight:500">{{ result.severity.duration.text }}</div>
+      </div>
+      <div>
+        <div class="stat-label">Usually lasts</div>
+        <div style="font-weight:500">{{ p.typical_duration }}</div>
+      </div>
+    </div>
+
+    {% if plan.urgency %}
+    <div class="banner {% if 'within 24' in plan.urgency %}banner-caution{% else %}banner-info{% endif %}"
+         style="margin-top:1.3rem">
+      <svg class="banner-icon" width="18" height="18" viewBox="0 0 16 16" fill="none"
+           stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+        <circle cx="8" cy="8" r="6.4"/><path d="M8 4.3V8l2.6 1.6" stroke-linecap="round"/></svg>
+      <p><strong>{{ plan.urgency }}</strong>{{ plan.urgency_advice }}</p>
+    </div>
+    {% endif %}
+
+    {% if result.age_notes %}
+      {% for note in result.age_notes %}
+      <div class="banner banner-caution" style="margin-top:.8rem">
+        <svg class="banner-icon" width="18" height="18" viewBox="0 0 16 16" fill="none"
+             stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+          <circle cx="8" cy="8" r="6.6"/><path d="M8 4.6v4.2M8 11v.5" stroke-linecap="round"/></svg>
+        <p>{{ note }}</p>
+      </div>
+      {% endfor %}
+    {% endif %}
+
+    <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.4rem">
+      <a class="btn btn-primary" href="{{ url_for('download_report', consultation_id=consultation.id) }}">
+        Download PDF report
+      </a>
+      <a class="btn btn-secondary" href="{{ url_for('dashboard') }}">New consultation</a>
+    </div>
+  </div>
+
+  {# ── Evidence ─────────────────────────────────────────────────────── #}
+  <div class="card">
+    <h2>What the match is based on</h2>
+
+    <h3 style="margin-top:.4rem">Symptoms found in your description</h3>
+    <ul class="chips">
+      {% for s in result.symptoms %}
+        <li class="chip">{{ s }}</li>
+      {% endfor %}
+    </ul>
+
+    {% if result.denied %}
+      <h3 style="margin-top:1.1rem">You ruled these out</h3>
+      <ul class="chips">
+        {% for s in result.denied %}<li class="chip chip-denied">{{ s }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if p.missing %}
+      <h3 style="margin-top:1.1rem">Typical of {{ p.name }} but not reported by you</h3>
+      <ul class="chips">
+        {% for s in p.missing %}<li class="chip chip-denied" style="text-decoration:none">{{ s }}</li>{% endfor %}
+      </ul>
+      <p style="font-size:.86rem;color:var(--muted);margin-top:.7rem">
+        Missing symptoms are not proof against the condition. They are shown so you can
+        tell your doctor whether any of them have since appeared.
+      </p>
+    {% endif %}
+  </div>
+
+  {# ── Differentials ───────────────────────────────────────────────── #}
+  {% if result.candidates|length > 1 %}
+  <div class="card">
+    <h2>Other conditions considered</h2>
+    <ul class="diff">
+      {% for c in result.candidates %}
+        <li>
+          <div>
+            <div>{{ c.name }}{% if loop.first %} <span style="font-size:.78rem;color:var(--pulse-dark)">— top match</span>{% endif %}</div>
+            <div class="diff-dept">{{ c.department }} · {{ c.matched|length }} of {{ c.total_symptoms }} symptoms present</div>
+          </div>
+          <div class="diff-bar"><span style="width: {{ c.confidence }}%"></span></div>
+          <div class="diff-pct">{{ c.confidence|round|int }}%</div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  {# ── Care plan ───────────────────────────────────────────────────── #}
+  <div class="grid-2" style="margin-top:1.2rem">
+    <div class="card" style="margin-top:0">
+      <h2>Over-the-counter guidance</h2>
+      <ul class="plan-list">
+        {% for m in plan.medications %}<li>{{ m }}</li>{% endfor %}
+      </ul>
+      <p style="font-size:.85rem;color:var(--muted);margin:.9rem 0 0">
+        Check every medicine against your allergies and anything you already take.
+        Prescription-only drugs are named here for information, not as an instruction.
+      </p>
+    </div>
+
+    <div class="card" style="margin-top:0">
+      <h2>Precautions</h2>
+      <ul class="plan-list">
+        {% for pr in plan.precautions_do %}<li>{{ pr }}</li>{% endfor %}
+      </ul>
+    </div>
+
+    <div class="card" style="margin-top:0">
+      <h2>Foods to include</h2>
+      <ul class="plan-list">
+        {% for f in plan.food_eat %}<li>{{ f }}</li>{% endfor %}
+      </ul>
+    </div>
+
+    <div class="card" style="margin-top:0">
+      <h2>Foods to avoid</h2>
+      <ul class="plan-list avoid">
+        {% for f in plan.food_avoid %}<li>{{ f }}</li>{% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>See a doctor immediately if</h2>
+    <ul class="plan-list warn">
+      {% for w in plan.see_doctor_if %}<li>{{ w }}</li>{% endfor %}
+    </ul>
+  </div>
+
+  {# ── NLP trace ───────────────────────────────────────────────────── #}
+  {% set trace = result.nlp_trace %}
+  <details class="trace">
+    <summary>How the text was processed ({{ trace.engine }})</summary>
+    <div class="trace-body">
+      <dl style="margin:0">
+        <div class="trace-step">
+          <dt>1. Original input</dt><dd>{{ trace.original }}</dd>
+        </div>
+        <div class="trace-step">
+          <dt>2. Cleaned</dt><dd>{{ trace.cleaned }}</dd>
+        </div>
+        <div class="trace-step">
+          <dt>3. Tokens</dt><dd>{{ trace.tokens | join(' · ') }}</dd>
+        </div>
+        <div class="trace-step">
+          <dt>4. Stopwords removed</dt><dd>{{ trace.without_stopwords | join(' · ') }}</dd>
+        </div>
+        <div class="trace-step">
+          <dt>5. Lemmatised</dt><dd>{{ trace.lemmas | join(' · ') }}</dd>
+        </div>
+        <div class="trace-step">
+          <dt>6. POS tagged</dt>
+          <dd>{% for tok, tag in trace.pos_tags %}{{ tok }}/{{ tag }}{% if not loop.last %} · {% endif %}{% endfor %}</dd>
+        </div>
+        <div class="trace-step">
+          <dt>7. Keywords kept</dt><dd>{{ trace.keywords | join(' · ') }}</dd>
+        </div>
+        <div class="trace-step">
+          <dt>8. Mapped symptoms</dt><dd>{{ result.symptoms | join(' · ') or 'none' }}</dd>
+        </div>
+        <div class="trace-step">
+          <dt>Scoring</dt>
+          <dd>coverage {{ p.recall }}% · relevance {{ p.precision }}% ·
+              baseline recall formula {{ p.baseline_score }}% · final {{ p.confidence }}%</dd>
+        </div>
+      </dl>
+    </div>
+  </details>
+
+  <div class="disclaimer">
+    <p><strong>This is not a diagnosis.</strong> The result above comes from matching
+    keywords against a fixed table of {{ p.total_symptoms }}-symptom condition profiles.
+    It cannot examine you, order tests, or weigh your medical history. Many serious
+    conditions begin with exactly the symptoms listed here, and many trivial ones look
+    alarming on paper. Take this report to a qualified doctor rather than acting on it
+    alone.</p>
+  </div>
+{% endif %}
+{% endblock %}

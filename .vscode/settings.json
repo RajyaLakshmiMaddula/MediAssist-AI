@@ -1,0 +1,18 @@
+{
+  "python.terminal.activateEnvironment": true,
+  "python.analysis.extraPaths": ["${workspaceFolder}"],
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/*.pyc": true
+  },
+  "emmet.includeLanguages": {
+    "jinja-html": "html"
+  },
+  "files.associations": {
+    "**/templates/*.html": "jinja-html"
+  },
+  "[python]": {
+    "editor.rulers": [88],
+    "editor.tabSize": 4
+  }
+}

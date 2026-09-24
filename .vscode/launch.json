@@ -1,0 +1,25 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "MediAssist AI (Flask)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/app.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "FLASK_CONFIG": "development"
+      },
+      "justMyCode": false
+    },
+    {
+      "name": "Download NLTK data",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/setup_nltk.py",
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}

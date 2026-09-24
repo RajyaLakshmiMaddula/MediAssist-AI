@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Conditions covered — {{ app_name }}{% endblock %}
+
+{% block content %}
+<div class="page-head">
+  <h1>Conditions covered</h1>
+  <p>The knowledge base holds {{ total }} conditions. Anything outside this list cannot be
+     matched, however clearly you describe it — which is the main limitation of the system
+     and the reason a real consultation is not optional.</p>
+</div>
+
+{% for department, items in grouped.items() %}
+  <section class="dept-group">
+    <h2>{{ department }} <span class="dept-count">{{ items|length }}</span></h2>
+    {% for d in items %}
+      <article class="condition">
+        <h3>{{ d.name }}</h3>
+        <p>{{ d.description }}</p>
+        <ul class="chips">
+          {% for s in d.symptom_names %}<li class="chip">{{ s }}</li>{% endfor %}
+        </ul>
+        <p style="font-size:.84rem;color:var(--muted);margin:.7rem 0 0">
+          Typical course: {{ d.typical_duration }}{% if d.self_limiting %} · usually settles on its own{% endif %}
+        </p>
+      </article>
+    {% endfor %}
+  </section>
+{% endfor %}
+
+<div class="disclaimer">
+  <p>Symptom profiles here are simplified for teaching purposes. Real conditions present
+     differently in different people, and the same symptom set can point to something far
+     more serious than anything listed above.</p>
+</div>
+{% endblock %}

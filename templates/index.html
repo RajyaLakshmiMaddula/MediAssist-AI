@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% block title %}{{ app_name }} — symptom analysis in plain language{% endblock %}
+
+{% block public_content %}
+<section class="hero">
+  <span class="hero-eyebrow">
+    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+      <path d="M1 8h3l2-5 3 10 2-6 1.5 1H15" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Natural language symptom analysis
+  </span>
+
+  <h1>Say what hurts. In your own words.</h1>
+  <p class="hero-lede">
+    Type your symptoms the way you would tell a friend. MediAssist reads the sentence,
+    pulls out the clinical terms, weighs them against {{ disease_count }} conditions and
+    tells you what it found, how sure it is, and which department to visit.
+  </p>
+
+  <svg class="ecg" viewBox="0 0 640 62" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 40 H62 l10-18 8 34 9-44 10 52 8-24 h14 l7-9 6 9 H210 l9-14 7 26 8-34 9 40 7-18 H340
+             l12-20 7 30 9-38 8 44 7-16 h16 l8-10 6 10 H520 l10-16 7 26 8-32 8 36 6-14 H640"/>
+  </svg>
+
+  <div class="hero-demo">
+    <label for="demo-input">Try it — describe a complaint</label>
+    <textarea id="demo-input" readonly aria-live="polite"></textarea>
+    <div class="hero-actions">
+      <a class="btn btn-primary btn-lg" href="{{ url_for('register') }}">Start a consultation</a>
+      <a class="btn btn-secondary btn-lg" href="{{ url_for('login') }}">I have an account</a>
+    </div>
+    <p class="hero-note" style="margin-top:.8rem">
+      Free, no payment details. Your consultations stay private to your account.
+    </p>
+  </div>
+
+  <div class="stat-strip">
+    <div>
+      <div class="stat-value">{{ disease_count }}</div>
+      <div class="stat-label">Conditions in the knowledge base</div>
+    </div>
+    <div>
+      <div class="stat-value">{{ symptom_count }}</div>
+      <div class="stat-label">Symptoms recognised, plus everyday phrasings</div>
+    </div>
+    <div>
+      <div class="stat-value">7</div>
+      <div class="stat-label">NLP stages from raw sentence to ranked match</div>
+    </div>
+  </div>
+</section>
+
+<div class="section-alt">
+  <section class="section">
+    <h2>How your sentence becomes a result</h2>
+    <p style="color:var(--muted)">
+      Every stage is visible in your result page, so you can see exactly why the system
+      landed where it did rather than trusting a number.
+    </p>
+
+    <div class="pipeline">
+      <div class="pipeline-step">
+        <span class="step-n">Stage 1</span>
+        <h3>Tokenise</h3>
+        <p>The sentence is cleaned and split into individual words.</p>
+      </div>
+      <div class="pipeline-step">
+        <span class="step-n">Stage 2</span>
+        <h3>Strip filler</h3>
+        <p>Common words go, but negations like "no" and "without" are kept.</p>
+      </div>
+      <div class="pipeline-step">
+        <span class="step-n">Stage 3</span>
+        <h3>Lemmatise and tag</h3>
+        <p>"coughing" becomes "cough", then each word gets a part of speech.</p>
+      </div>
+      <div class="pipeline-step">
+        <span class="step-n">Stage 4</span>
+        <h3>Map to symptoms</h3>
+        <p>"loose motions" and "watery stools" both resolve to diarrhea.</p>
+      </div>
+      <div class="pipeline-step">
+        <span class="step-n">Stage 5</span>
+        <h3>Grade severity</h3>
+        <p>Intensity words and duration set how urgent the picture looks.</p>
+      </div>
+      <div class="pipeline-step">
+        <span class="step-n">Stage 6</span>
+        <h3>Score conditions</h3>
+        <p>Rare, telling symptoms count for more than common ones.</p>
+      </div>
+      <div class="pipeline-step">
+        <span class="step-n">Stage 7</span>
+        <h3>Build the plan</h3>
+        <p>Medicines, food, precautions and the department to visit.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="section">
+  <div class="grid-2">
+    <div class="card">
+      <h2>It knows what you ruled out</h2>
+      <p style="font-size:.94rem;color:var(--ink-soft)">
+        Write "fever and body ache but no cough" and cough is recorded as denied, not
+        detected. Conditions that depend on it get pushed down the ranking instead of up.
+      </p>
+    </div>
+    <div class="card">
+      <h2>Emergencies skip the ranking</h2>
+      <p style="font-size:.94rem;color:var(--ink-soft)">
+        Phrases pointing to a stroke, heart attack or breathing crisis stop the analysis
+        and show one instruction: get help now. A confidence percentage is the wrong
+        answer to that sentence.
+      </p>
+    </div>
+    <div class="card">
+      <h2>Every result is explained</h2>
+      <p style="font-size:.94rem;color:var(--ink-soft)">
+        You see which symptoms matched, which are missing, what else was considered and
+        how close the runner-up was. Low confidence is reported as low confidence.
+      </p>
+    </div>
+    <div class="card">
+      <h2>Reports you can hand over</h2>
+      <p style="font-size:.94rem;color:var(--ink-soft)">
+        Download any consultation as a PDF and take it to your appointment. It is a
+        structured summary of what you reported, not a prescription.
+      </p>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <p><strong>This is not a diagnosis.</strong> MediAssist AI is an educational project.
+    It cannot examine you, order a blood test, or know your medical history and current
+    medication. Symptom overlap between serious and trivial conditions is enormous, and
+    software pattern-matching cannot tell them apart. Use this to organise your thoughts
+    before seeing a doctor. If you are worried, in pain, or getting worse, contact a
+    qualified doctor or your local emergency number.</p>
+  </div>
+</section>
+{% endblock %}

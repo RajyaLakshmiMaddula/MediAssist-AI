@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Create account — {{ app_name }}{% endblock %}
+
+{% block public_content %}
+<div class="auth-wrap">
+  <div class="auth-card">
+    <h1>Create your account</h1>
+    <p>Age and gender are optional, but they let the system adjust its advice.</p>
+
+    {% include "_flashes.html" %}
+
+    <form method="post" novalidate>
+      {{ form.hidden_tag() }}
+
+      <div class="field">
+        {{ form.name.label }}
+        {{ form.name(placeholder="Priya Sharma", autocomplete="name", autofocus=true) }}
+        {% for e in form.name.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+      </div>
+
+      <div class="field">
+        {{ form.email.label }}
+        {{ form.email(placeholder="you@example.com", autocomplete="email") }}
+        {% for e in form.email.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          {{ form.age.label }}
+          {{ form.age(placeholder="24") }}
+          {% for e in form.age.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+        </div>
+        <div class="field">
+          {{ form.gender.label }}
+          {{ form.gender() }}
+        </div>
+      </div>
+
+      <div class="field">
+        {{ form.password.label }}
+        {{ form.password(autocomplete="new-password") }}
+        <p class="field-hint">At least 8 characters.</p>
+        {% for e in form.password.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+      </div>
+
+      <div class="field">
+        {{ form.confirm.label }}
+        {{ form.confirm(autocomplete="new-password") }}
+        {% for e in form.confirm.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+      </div>
+
+      {{ form.submit(class="btn btn-primary btn-lg", style="width:100%") }}
+    </form>
+
+    <p class="auth-foot">
+      Already registered? <a href="{{ url_for('login') }}">Sign in</a>
+    </p>
+  </div>
+</div>
+{% endblock %}
+
+{% block public_flashes %}{% endblock %}

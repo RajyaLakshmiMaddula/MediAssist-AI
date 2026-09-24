@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}History — {{ app_name }}{% endblock %}
+
+{% block content %}
+<div class="page-head">
+  <h1>Consultation history</h1>
+  <p>Every analysis you have run, newest first. Open one to see the full care plan or
+     download it as a PDF.</p>
+</div>
+
+{% if consultations %}
+  <ul class="record-list">
+    {% for c in consultations %}
+      <li class="record">
+        <div class="record-date">
+          <strong>{{ c.created_at.strftime('%d') }}</strong>{{ c.created_at.strftime('%b %Y') }}
+        </div>
+        <div>
+          <div class="record-title">
+            {% if c.status == 'emergency' %}
+              Emergency warning issued
+            {% else %}
+              {{ c.disease or 'No clear match' }}
+            {% endif %}
+          </div>
+          <div class="record-meta">
+            {% if c.confidence %}{{ c.confidence|round|int }}% match · {% endif %}
+            {% if c.department %}{{ c.department }} · {% endif %}
+            {{ c.severity or 'Unrated' }} · {{ c.reference }}
+          </div>
+        </div>
+        <div class="record-actions">
+          <a class="btn btn-ghost" href="{{ url_for('consultation_detail', consultation_id=c.id) }}">Open</a>
+          {% if c.disease %}
+            <a class="btn btn-ghost" href="{{ url_for('download_report', consultation_id=c.id) }}">PDF</a>
+          {% endif %}
+          <form method="post" action="{{ url_for('delete_consultation', consultation_id=c.id) }}"
+                style="display:inline" onsubmit="return confirm('Delete this consultation permanently?')">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <button type="submit" class="btn btn-ghost" style="color:var(--alert)">Delete</button>
+          </form>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+
+  {% if pagination.pages > 1 %}
+    <nav class="pager" aria-label="Pagination">
+      {% if pagination.has_prev %}
+        <a class="btn btn-secondary" href="{{ url_for('history', page=pagination.prev_num) }}">Previous</a>
+      {% endif %}
+      <span class="btn btn-ghost" aria-current="page">
+        Page {{ pagination.page }} of {{ pagination.pages }}
+      </span>
+      {% if pagination.has_next %}
+        <a class="btn btn-secondary" href="{{ url_for('history', page=pagination.next_num) }}">Next</a>
+      {% endif %}
+    </nav>
+  {% endif %}
+
+{% else %}
+  <div class="empty">
+    <h2>No consultations yet</h2>
+    <p>Once you describe your symptoms, every analysis is saved here so you can compare
+       how things change over time.</p>
+    <a class="btn btn-primary btn-lg" href="{{ url_for('dashboard') }}" style="margin-top:1.2rem">
+      Start your first consultation
+    </a>
+  </div>
+{% endif %}
+{% endblock %}

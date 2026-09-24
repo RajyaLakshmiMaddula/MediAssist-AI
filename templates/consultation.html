@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% block title %}{{ consultation.reference }} — {{ app_name }}{% endblock %}
+
+{% block content %}
+<div class="page-head">
+  <h1>{{ consultation.disease or 'Consultation' }}</h1>
+  <p>{{ consultation.reference }} · {{ consultation.created_at.strftime('%d %B %Y at %H:%M') }}</p>
+</div>
+
+{% if consultation.status == 'emergency' %}
+  <div class="banner banner-emergency">
+    <svg class="banner-icon" width="20" height="20" viewBox="0 0 16 16" fill="none"
+         stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+      <path d="M8 1.6 15 14H1z" stroke-linejoin="round"/><path d="M8 6.2v3.2M8 11.3v.5" stroke-linecap="round"/></svg>
+    <p><strong>An emergency warning was issued for this entry.</strong>
+       No analysis was run. If the symptoms described are still present, seek in-person
+       medical care now.</p>
+  </div>
+{% endif %}
+
+<div class="card">
+  <h2>What you reported</h2>
+  <p style="font-size:.97rem">{{ consultation.symptoms_text }}</p>
+
+  <div class="form-row" style="margin-top:1.2rem;gap:1.4rem">
+    <div><div class="stat-label">Age</div><div style="font-weight:500">{{ consultation.age or '—' }}</div></div>
+    <div><div class="stat-label">Gender</div><div style="font-weight:500">{{ consultation.gender or '—' }}</div></div>
+    <div><div class="stat-label">Severity</div><div style="font-weight:500">{{ consultation.severity or '—' }}</div></div>
+    <div><div class="stat-label">Duration</div><div style="font-weight:500">{{ consultation.duration or '—' }}</div></div>
+  </div>
+
+  {% if consultation.symptom_list %}
+    <h3 style="margin-top:1.3rem">Symptoms identified</h3>
+    <ul class="chips">
+      {% for s in consultation.symptom_list %}<li class="chip">{{ s }}</li>{% endfor %}
+      {% for s in consultation.denied_list %}<li class="chip chip-denied">{{ s }}</li>{% endfor %}
+    </ul>
+  {% endif %}
+</div>
+
+{% if consultation.disease %}
+<div class="card">
+  <div class="verdict">
+    <div>
+      <div class="verdict-name">{{ consultation.disease }}</div>
+      <p class="verdict-desc">Suggested department: {{ consultation.department }}</p>
+    </div>
+    <div class="dial dial--{{ consultation.certainty or 'moderate' }}"
+         role="img"
+         aria-label="Symptom match {{ consultation.confidence|round|int }} percent">
+      <svg viewBox="0 0 120 120" aria-hidden="true">
+        <circle class="dial-track" cx="60" cy="60" r="52"/>
+        <circle class="dial-value" cx="60" cy="60" r="52"
+                style="--pct: {{ consultation.confidence|round|int }}"/>
+      </svg>
+      <div class="dial-readout">
+        <span class="dial-pct">{{ consultation.confidence|round|int }}</span>
+        <span class="dial-unit">percent</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="dial-caption">
+    {{ {'strong':'Strong symptom match','moderate':'Moderate symptom match',
+        'weak':'Weak symptom match','inconclusive':'Unclear match'}.get(consultation.certainty, 'Symptom match') }}
+    recorded at the time of this consultation. This is a similarity score, not a diagnosis.
+  </p>
+
+  {% if consultation.urgency %}
+    <div class="banner banner-info" style="margin-top:1.2rem">
+      <svg class="banner-icon" width="18" height="18" viewBox="0 0 16 16" fill="none"
+           stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+        <circle cx="8" cy="8" r="6.4"/><path d="M8 4.3V8l2.6 1.6" stroke-linecap="round"/></svg>
+      <p><strong>{{ consultation.urgency }}</strong></p>
+    </div>
+  {% endif %}
+
+  <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.3rem">
+    <a class="btn btn-primary" href="{{ url_for('download_report', consultation_id=consultation.id) }}">
+      Download PDF report
+    </a>
+    <a class="btn btn-secondary" href="{{ url_for('dashboard') }}">New consultation</a>
+  </div>
+</div>
+
+{% if consultation.differential_list|length > 1 %}
+<div class="card">
+  <h2>Other conditions considered</h2>
+  <ul class="diff">
+    {% for d in consultation.differential_list %}
+      <li>
+        <div>
+          <div>{{ d.name }}</div>
+          <div class="diff-dept">{{ d.department }}</div>
+        </div>
+        <div class="diff-bar"><span style="width: {{ d.confidence }}%"></span></div>
+        <div class="diff-pct">{{ d.confidence|round|int }}%</div>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+
+<div class="grid-2" style="margin-top:1.2rem">
+  <div class="card" style="margin-top:0">
+    <h2>Over-the-counter guidance</h2>
+    <ul class="plan-list">{% for m in consultation.medication_list %}<li>{{ m }}</li>{% endfor %}</ul>
+  </div>
+  <div class="card" style="margin-top:0">
+    <h2>Precautions</h2>
+    <ul class="plan-list">{% for p in consultation.precaution_list %}<li>{{ p }}</li>{% endfor %}</ul>
+  </div>
+  <div class="card" style="margin-top:0">
+    <h2>Foods to include</h2>
+    <ul class="plan-list">{% for f in consultation.eat_list %}<li>{{ f }}</li>{% endfor %}</ul>
+  </div>
+  <div class="card" style="margin-top:0">
+    <h2>Foods to avoid</h2>
+    <ul class="plan-list avoid">{% for f in consultation.avoid_list %}<li>{{ f }}</li>{% endfor %}</ul>
+  </div>
+</div>
+
+<div class="card">
+  <h2>See a doctor immediately if</h2>
+  <ul class="plan-list warn">{% for w in consultation.warning_list %}<li>{{ w }}</li>{% endfor %}</ul>
+</div>
+{% endif %}
+
+<div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.5rem">
+  <a class="btn btn-secondary" href="{{ url_for('history') }}">Back to history</a>
+  <form method="post" action="{{ url_for('delete_consultation', consultation_id=consultation.id) }}"
+        onsubmit="return confirm('Delete this consultation permanently?')">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <button type="submit" class="btn btn-danger">Delete consultation</button>
+  </form>
+</div>
+
+<div class="disclaimer">
+  <p>Saved record from an automated symptom-matching program. Not a diagnosis and not
+     reviewed by a clinician. Conditions change; if these symptoms are still present or
+     have worsened since this record was made, see a doctor.</p>
+</div>
+{% endblock %}

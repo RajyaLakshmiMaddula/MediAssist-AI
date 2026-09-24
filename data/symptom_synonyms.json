@@ -1,0 +1,711 @@
+{
+  "fever": [
+    "fever",
+    "temperature",
+    "feverish",
+    "pyrexia",
+    "hot body",
+    "running temperature",
+    "high temp"
+  ],
+  "high fever": [
+    "high fever",
+    "very high fever",
+    "severe fever",
+    "burning fever",
+    "103 fever",
+    "102 fever"
+  ],
+  "mild fever": [
+    "mild fever",
+    "low fever",
+    "slight fever",
+    "low grade fever",
+    "little fever"
+  ],
+  "prolonged fever": [
+    "prolonged fever",
+    "continuous fever",
+    "fever for a week",
+    "long standing fever",
+    "persistent fever"
+  ],
+  "chills": [
+    "chills",
+    "shivering",
+    "shivers",
+    "rigors",
+    "feeling cold",
+    "cold shivers"
+  ],
+  "sweating": [
+    "sweating",
+    "sweat",
+    "perspiration",
+    "night sweats",
+    "sweaty"
+  ],
+  "headache": [
+    "headache",
+    "head pain",
+    "head ache",
+    "pain in head",
+    "head is paining"
+  ],
+  "severe headache": [
+    "severe headache",
+    "splitting headache",
+    "terrible headache",
+    "intense headache",
+    "unbearable headache"
+  ],
+  "throbbing pain": [
+    "throbbing",
+    "pulsating pain",
+    "pounding head",
+    "throbbing pain"
+  ],
+  "cough": [
+    "cough",
+    "coughing",
+    "coughs"
+  ],
+  "dry cough": [
+    "dry cough",
+    "cough without mucus",
+    "hacking cough",
+    "tickly cough"
+  ],
+  "persistent cough": [
+    "persistent cough",
+    "cough for weeks",
+    "long cough",
+    "chronic cough",
+    "cough not going"
+  ],
+  "night cough": [
+    "night cough",
+    "cough at night",
+    "coughing at night",
+    "nighttime cough"
+  ],
+  "mucus": [
+    "mucus",
+    "phlegm",
+    "sputum",
+    "wet cough",
+    "cough with mucus",
+    "productive cough"
+  ],
+  "sore throat": [
+    "sore throat",
+    "throat pain",
+    "painful throat",
+    "scratchy throat",
+    "throat is paining"
+  ],
+  "itchy throat": [
+    "itchy throat",
+    "tickling throat",
+    "irritated throat"
+  ],
+  "hoarse voice": [
+    "hoarse",
+    "hoarse voice",
+    "voice change",
+    "raspy voice",
+    "lost my voice"
+  ],
+  "difficulty swallowing": [
+    "difficulty swallowing",
+    "pain while swallowing",
+    "hard to swallow",
+    "cannot swallow",
+    "painful swallowing"
+  ],
+  "swollen glands": [
+    "swollen glands",
+    "swollen lymph nodes",
+    "neck swelling",
+    "swollen neck"
+  ],
+  "runny nose": [
+    "runny nose",
+    "nose running",
+    "nasal discharge",
+    "watery nose",
+    "rhinorrhea"
+  ],
+  "thick nasal discharge": [
+    "thick nasal discharge",
+    "green mucus",
+    "yellow mucus",
+    "thick discharge"
+  ],
+  "nasal congestion": [
+    "nasal congestion",
+    "blocked nose",
+    "stuffy nose",
+    "nose block",
+    "congested nose",
+    "cannot breathe through nose"
+  ],
+  "sneezing": [
+    "sneezing",
+    "sneeze",
+    "sneezes",
+    "continuous sneezing"
+  ],
+  "reduced smell": [
+    "reduced smell",
+    "cannot smell properly",
+    "decreased smell"
+  ],
+  "loss of smell": [
+    "loss of smell",
+    "no smell",
+    "cannot smell",
+    "anosmia",
+    "lost my sense of smell"
+  ],
+  "loss of taste": [
+    "loss of taste",
+    "no taste",
+    "cannot taste",
+    "ageusia",
+    "food has no taste"
+  ],
+  "body pain": [
+    "body pain",
+    "body ache",
+    "body aches",
+    "aching all over",
+    "whole body pain",
+    "myalgia"
+  ],
+  "muscle pain": [
+    "muscle pain",
+    "muscle ache",
+    "sore muscles",
+    "muscle soreness"
+  ],
+  "muscle weakness": [
+    "muscle weakness",
+    "weak muscles"
+  ],
+  "joint pain": [
+    "joint pain",
+    "joints paining",
+    "arthralgia",
+    "knee pain",
+    "aching joints"
+  ],
+  "joint stiffness": [
+    "joint stiffness",
+    "stiff joints",
+    "stiffness"
+  ],
+  "joint swelling": [
+    "joint swelling",
+    "swollen joints",
+    "swelling in joints"
+  ],
+  "morning stiffness": [
+    "morning stiffness",
+    "stiff in the morning",
+    "stiffness after waking"
+  ],
+  "redness over joint": [
+    "redness over joint",
+    "red joint",
+    "warm joint"
+  ],
+  "reduced mobility": [
+    "reduced mobility",
+    "difficulty moving",
+    "cannot bend",
+    "limited movement"
+  ],
+  "neck pain": [
+    "neck pain",
+    "stiff neck",
+    "neck stiffness",
+    "neck ache"
+  ],
+  "shoulder pain": [
+    "shoulder pain",
+    "shoulder ache",
+    "tight shoulders"
+  ],
+  "back pain": [
+    "back pain",
+    "backache",
+    "lower back pain",
+    "back ache"
+  ],
+  "fatigue": [
+    "fatigue",
+    "tired",
+    "tiredness",
+    "exhausted",
+    "exhaustion",
+    "lethargy",
+    "no energy",
+    "feeling drained"
+  ],
+  "weakness": [
+    "weakness",
+    "weak",
+    "feeling weak",
+    "no strength"
+  ],
+  "loss of appetite": [
+    "loss of appetite",
+    "not hungry",
+    "no appetite",
+    "cannot eat",
+    "reduced appetite"
+  ],
+  "increased hunger": [
+    "increased hunger",
+    "always hungry",
+    "excessive hunger",
+    "eating a lot"
+  ],
+  "excessive thirst": [
+    "excessive thirst",
+    "always thirsty",
+    "very thirsty",
+    "drinking a lot of water"
+  ],
+  "nausea": [
+    "nausea",
+    "nauseous",
+    "feeling like vomiting",
+    "queasy",
+    "sick feeling"
+  ],
+  "vomiting": [
+    "vomiting",
+    "vomit",
+    "throwing up",
+    "puking",
+    "threw up"
+  ],
+  "diarrhea": [
+    "diarrhea",
+    "diarrhoea",
+    "loose motions",
+    "loose stools",
+    "watery stools",
+    "loose motion"
+  ],
+  "constipation": [
+    "constipation",
+    "hard stools",
+    "not passing stool",
+    "constipated"
+  ],
+  "abdominal pain": [
+    "abdominal pain",
+    "stomach pain",
+    "tummy pain",
+    "belly pain",
+    "stomach ache",
+    "pain in abdomen"
+  ],
+  "burning stomach pain": [
+    "burning stomach pain",
+    "burning in stomach",
+    "gnawing stomach pain"
+  ],
+  "stomach cramps": [
+    "stomach cramps",
+    "cramps",
+    "abdominal cramps",
+    "cramping"
+  ],
+  "bloating": [
+    "bloating",
+    "bloated",
+    "gas",
+    "gassy",
+    "fullness in stomach"
+  ],
+  "heartburn": [
+    "heartburn",
+    "burning in chest after eating",
+    "acidity"
+  ],
+  "acid reflux": [
+    "acid reflux",
+    "reflux",
+    "acid coming up",
+    "regurgitation"
+  ],
+  "chest burning": [
+    "chest burning",
+    "burning chest",
+    "burning behind breastbone"
+  ],
+  "sour taste": [
+    "sour taste",
+    "bitter taste in mouth",
+    "sour belching"
+  ],
+  "black stools": [
+    "black stools",
+    "dark stools",
+    "tarry stools",
+    "blood in stool"
+  ],
+  "dehydration": [
+    "dehydration",
+    "dehydrated",
+    "dry mouth",
+    "not passing urine"
+  ],
+  "chest pain": [
+    "chest pain",
+    "pain in chest",
+    "chest hurts"
+  ],
+  "chest tightness": [
+    "chest tightness",
+    "tight chest",
+    "heaviness in chest",
+    "chest heaviness"
+  ],
+  "chest discomfort": [
+    "chest discomfort",
+    "uneasy chest",
+    "discomfort in chest"
+  ],
+  "breathlessness": [
+    "breathlessness",
+    "shortness of breath",
+    "short of breath",
+    "cannot breathe properly",
+    "breathless",
+    "dyspnea"
+  ],
+  "difficulty breathing": [
+    "difficulty breathing",
+    "trouble breathing",
+    "hard to breathe",
+    "laboured breathing"
+  ],
+  "rapid breathing": [
+    "rapid breathing",
+    "fast breathing",
+    "panting",
+    "breathing fast"
+  ],
+  "wheezing": [
+    "wheezing",
+    "whistling sound while breathing",
+    "wheeze"
+  ],
+  "rapid heartbeat": [
+    "rapid heartbeat",
+    "palpitations",
+    "fast heartbeat",
+    "heart racing",
+    "heart pounding"
+  ],
+  "dizziness": [
+    "dizziness",
+    "dizzy",
+    "lightheaded",
+    "light headed",
+    "feeling faint"
+  ],
+  "spinning sensation": [
+    "spinning sensation",
+    "room is spinning",
+    "everything spinning",
+    "vertigo"
+  ],
+  "loss of balance": [
+    "loss of balance",
+    "unsteady",
+    "cannot balance",
+    "imbalance"
+  ],
+  "ringing in ears": [
+    "ringing in ears",
+    "tinnitus",
+    "buzzing in ears"
+  ],
+  "blurred vision": [
+    "blurred vision",
+    "blurry vision",
+    "unclear vision",
+    "vision blurred"
+  ],
+  "sensitivity to light": [
+    "sensitivity to light",
+    "light hurts my eyes",
+    "photophobia",
+    "cannot tolerate light"
+  ],
+  "sensitivity to sound": [
+    "sensitivity to sound",
+    "sound hurts",
+    "phonophobia",
+    "noise is unbearable"
+  ],
+  "aura": [
+    "aura",
+    "flashing lights",
+    "zigzag lines",
+    "visual disturbance before headache"
+  ],
+  "eye strain": [
+    "eye strain",
+    "tired eyes",
+    "strained eyes",
+    "screen fatigue"
+  ],
+  "red eyes": [
+    "red eyes",
+    "red eye",
+    "bloodshot eyes",
+    "eye redness"
+  ],
+  "itchy eyes": [
+    "itchy eyes",
+    "eyes itching",
+    "scratchy eyes",
+    "eyes are itchy",
+    "itchy watery eyes"
+  ],
+  "watery eyes": [
+    "watery eyes",
+    "tearing eyes",
+    "eyes watering"
+  ],
+  "eye discharge": [
+    "eye discharge",
+    "sticky eyes",
+    "pus from eye",
+    "crusty eyes"
+  ],
+  "gritty eyes": [
+    "gritty eyes",
+    "sand in eye feeling",
+    "foreign body sensation"
+  ],
+  "swollen eyelids": [
+    "swollen eyelids",
+    "puffy eyelids",
+    "swollen eyes"
+  ],
+  "pain behind eyes": [
+    "pain behind eyes",
+    "retro orbital pain",
+    "eye socket pain",
+    "pain behind the eyes"
+  ],
+  "facial pain": [
+    "facial pain",
+    "face pain",
+    "pressure in face",
+    "cheek pain",
+    "facial pressure"
+  ],
+  "toothache": [
+    "toothache",
+    "tooth pain",
+    "upper teeth pain"
+  ],
+  "rash": [
+    "rash",
+    "skin rash",
+    "red spots",
+    "skin eruption"
+  ],
+  "itchy rash": [
+    "itchy rash",
+    "itching rash",
+    "itchy skin",
+    "skin itching",
+    "rash with itching"
+  ],
+  "blisters": [
+    "blisters",
+    "fluid filled bumps",
+    "vesicles",
+    "water bubbles on skin"
+  ],
+  "dry skin": [
+    "dry skin",
+    "rough skin",
+    "flaky skin"
+  ],
+  "pale skin": [
+    "pale skin",
+    "pallor",
+    "looking pale",
+    "pale face"
+  ],
+  "hair loss": [
+    "hair loss",
+    "hair fall",
+    "losing hair",
+    "thinning hair"
+  ],
+  "brittle nails": [
+    "brittle nails",
+    "weak nails",
+    "cracking nails"
+  ],
+  "cold hands": [
+    "cold hands",
+    "cold feet",
+    "cold extremities"
+  ],
+  "cold intolerance": [
+    "cold intolerance",
+    "feeling cold always",
+    "cannot tolerate cold"
+  ],
+  "puffy face": [
+    "puffy face",
+    "swollen face",
+    "facial puffiness"
+  ],
+  "slow healing wounds": [
+    "slow healing wounds",
+    "wounds not healing",
+    "cuts heal slowly"
+  ],
+  "tingling feet": [
+    "tingling feet",
+    "numbness in feet",
+    "pins and needles",
+    "burning feet"
+  ],
+  "weight loss": [
+    "weight loss",
+    "losing weight",
+    "lost weight",
+    "unexplained weight loss"
+  ],
+  "weight gain": [
+    "weight gain",
+    "gaining weight",
+    "put on weight"
+  ],
+  "burning urination": [
+    "burning urination",
+    "burning while passing urine",
+    "painful urination",
+    "burning sensation while urinating",
+    "dysuria",
+    "burning sensation while passing urine",
+    "burning while urinating",
+    "pain while passing urine",
+    "burning when i pee",
+    "burning sensation urine"
+  ],
+  "frequent urination": [
+    "frequent urination",
+    "urinating often",
+    "passing urine frequently",
+    "peeing a lot",
+    "going to the toilet very often",
+    "passing urine very often",
+    "urinating frequently",
+    "going to the bathroom often"
+  ],
+  "urgency to urinate": [
+    "urgency to urinate",
+    "sudden urge to urinate",
+    "cannot hold urine"
+  ],
+  "cloudy urine": [
+    "cloudy urine",
+    "foul smelling urine",
+    "turbid urine",
+    "urine looks cloudy",
+    "urine is cloudy"
+  ],
+  "blood in urine": [
+    "blood in urine",
+    "red urine",
+    "hematuria"
+  ],
+  "pelvic pain": [
+    "pelvic pain",
+    "lower abdomen pain",
+    "pain in pelvis"
+  ],
+  "bleeding gums": [
+    "bleeding gums",
+    "gum bleeding",
+    "bleeding from gums",
+    "nose and gum bleeding"
+  ],
+  "nosebleed": [
+    "nosebleed",
+    "bleeding from nose",
+    "epistaxis"
+  ],
+  "anemia": [
+    "anemia",
+    "low hemoglobin",
+    "low blood"
+  ],
+  "confusion": [
+    "confusion",
+    "confused",
+    "disoriented",
+    "not thinking clearly"
+  ],
+  "difficulty concentrating": [
+    "difficulty concentrating",
+    "cannot focus",
+    "poor concentration",
+    "brain fog"
+  ],
+  "difficulty sleeping": [
+    "difficulty sleeping",
+    "insomnia",
+    "cannot sleep",
+    "sleepless",
+    "not sleeping well"
+  ],
+  "restlessness": [
+    "restlessness",
+    "restless",
+    "cannot sit still",
+    "on edge"
+  ],
+  "excessive worry": [
+    "excessive worry",
+    "worrying a lot",
+    "anxious",
+    "anxiety",
+    "constant worry",
+    "overthinking"
+  ],
+  "trembling": [
+    "trembling",
+    "shaking hands",
+    "tremor",
+    "shaky"
+  ],
+  "stress": [
+    "stress",
+    "stressed",
+    "under pressure",
+    "tension"
+  ],
+  "depression": [
+    "depression",
+    "feeling low",
+    "sad all the time",
+    "low mood"
+  ]
+}

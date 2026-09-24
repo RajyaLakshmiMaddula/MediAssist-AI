@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block title %}New consultation — {{ app_name }}{% endblock %}
+
+{% block content %}
+<div class="page-head">
+  <h1>Hello, {{ current_user.name.split()[0] }}</h1>
+  <p>Describe what you are feeling in full sentences. The more detail you give, the
+     better the match — include when it started and anything you have ruled out.</p>
+</div>
+
+<div class="card">
+  <form method="post" action="{{ url_for('run_diagnosis') }}" id="symptom-form" novalidate>
+    {{ form.hidden_tag() }}
+
+    <div class="field">
+      {{ form.symptoms.label(for="symptoms") }}
+      <p class="field-hint">
+        Example: "High fever for three days with severe headache and pain behind my eyes,
+        but no cough."
+      </p>
+      {{ form.symptoms(id="symptoms", placeholder="I have been feeling…") }}
+      {% for e in form.symptoms.errors %}<div class="field-error">{{ e }}</div>{% endfor %}
+    </div>
+
+    <div class="field">
+      <label for="example-picker">Or start from an example</label>
+      <ul class="chips" id="example-picker">
+        {% for example in examples %}
+          <li><button type="button" class="chip chip-button" data-example="{{ example }}">
+            {{ example[:42] }}…
+          </button></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="form-row">
+      <div class="field">
+        {{ form.age.label }}
+        {{ form.age(placeholder="24") }}
+      </div>
+      <div class="field">
+        {{ form.gender.label }}
+        {{ form.gender() }}
+      </div>
+      <div class="field">
+        {{ form.severity.label }}
+        {{ form.severity() }}
+      </div>
+      <div class="field">
+        {{ form.duration.label }}
+        {{ form.duration(placeholder="3 days") }}
+      </div>
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:.7rem;align-items:center">
+      {{ form.submit(class="btn btn-primary btn-lg") }}
+      <button type="button" class="btn btn-secondary" id="preview-btn">Preview the analysis</button>
+      <span style="font-size:.85rem;color:var(--muted)">
+        Preview runs the NLP engine without saving a consultation.
+      </span>
+    </div>
+  </form>
+
+  <div id="live-panel" hidden>
+    <div class="live-head">
+      <h3>Live preview</h3>
+      <span id="live-spinner" class="spinner" hidden aria-hidden="true"></span>
+    </div>
+    <div id="live-body"></div>
+  </div>
+</div>
+
+{% if recent %}
+<div class="card">
+  <h2>Recent consultations</h2>
+  <ul class="record-list" style="margin-top:.6rem">
+    {% for c in recent %}
+      <li class="record" style="margin-bottom:.5rem">
+        <div class="record-date">
+          <strong>{{ c.created_at.strftime('%d') }}</strong>{{ c.created_at.strftime('%b %Y') }}
+        </div>
+        <div>
+          <div class="record-title">{{ c.disease or 'No clear match' }}</div>
+          <div class="record-meta">
+            {% if c.confidence %}{{ c.confidence|round|int }}% match · {% endif %}{{ c.department or 'General Medicine' }}
+          </div>
+        </div>
+        <div class="record-actions">
+          <a class="btn btn-ghost" href="{{ url_for('consultation_detail', consultation_id=c.id) }}">Open</a>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+  <a href="{{ url_for('history') }}" style="font-size:.92rem">See all consultations</a>
+</div>
+{% endif %}
+
+<div class="banner banner-info" style="margin-top:1.2rem">
+  <svg class="banner-icon" width="18" height="18" viewBox="0 0 16 16" fill="none"
+       stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+    <circle cx="8" cy="8" r="6.6"/><path d="M8 7.2v4M8 4.8v.6" stroke-linecap="round"/></svg>
+  <p><strong>If this is an emergency, do not use this form.</strong>
+     Chest pain spreading to the arm, sudden weakness on one side, severe difficulty
+     breathing or a seizure need immediate in-person care. Call your local emergency number.</p>
+</div>
+
+<div class="disclaimer">
+  <p>MediAssist AI matches your words against a fixed knowledge base of
+     conditions. It is an academic project, not a medical device, and it has not been
+     clinically validated. Nothing here replaces an examination by a qualified doctor.</p>
+</div>
+{% endblock %}

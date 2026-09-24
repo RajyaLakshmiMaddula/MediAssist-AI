@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}{{ title }} — {{ app_name }}{% endblock %}
+
+{% macro body() %}
+<div class="error-page">
+  <div>
+    <div class="error-code">{{ code }}</div>
+    <h1 style="margin:.6rem 0">{{ title }}</h1>
+    <p style="color:var(--muted);margin-inline:auto">{{ message }}</p>
+    <a class="btn btn-primary" href="{{ url_for('index') }}" style="margin-top:1.2rem">
+      Go to the start
+    </a>
+  </div>
+</div>
+{% endmacro %}
+
+{% block content %}{{ body() }}{% endblock %}
+{% block public_content %}{{ body() }}{% endblock %}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{{ app_name }}{% endblock %}</title>
+  <meta name="description" content="Describe your symptoms in plain language and get structured guidance on what they might mean and who to see.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%230F8F72'/><path d='M4 17h5l3-7 4 14 3-9 2 2h7' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+{% macro logo(size=22, color='currentColor') -%}
+<svg width="{{ size }}" height="{{ size }}" viewBox="0 0 32 32" aria-hidden="true">
+  <rect width="32" height="32" rx="7" fill="{{ color }}"/>
+  <path d="M4 17h5l3-7 4 14 3-9 2 2h7" stroke="white" stroke-width="2.6" fill="none"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+{%- endmacro %}
+
+{% if current_user.is_authenticated %}
+  {# ── Signed-in shell ──────────────────────────────────────────────── #}
+  <div class="shell">
+    <aside class="sidebar">
+      <a class="brand" href="{{ url_for('dashboard') }}">{{ logo(24, '#0F8F72') }} MediAssist</a>
+
+      <nav aria-label="Main">
+        <a href="{{ url_for('dashboard') }}" {% if request.endpoint in ['dashboard','run_diagnosis'] %}class="active"{% endif %}>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <path d="M1 8h3l2-5 3 10 2-6 1.5 1H15" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          New consultation
+        </a>
+        <a href="{{ url_for('history') }}" {% if request.endpoint in ['history','consultation_detail'] %}class="active"{% endif %}>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <circle cx="8" cy="8" r="6.4"/><path d="M8 4.3V8l2.6 1.6" stroke-linecap="round"/></svg>
+          History
+        </a>
+        <a href="{{ url_for('conditions') }}" {% if request.endpoint == 'conditions' %}class="active"{% endif %}>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <path d="M3 2h7l3 3v9H3z" stroke-linejoin="round"/><path d="M5.6 8.4h4.8M8 6v4.8" stroke-linecap="round"/></svg>
+          Conditions covered
+        </a>
+      </nav>
+
+      <div class="sidebar-foot">
+        <div class="who">
+          <span class="avatar">{{ current_user.initials }}</span>
+          <span>
+            <span class="who-name">{{ current_user.name }}</span>
+            <span class="who-mail">{{ current_user.email }}</span>
+          </span>
+        </div>
+        <a href="{{ url_for('logout') }}">Sign out</a>
+      </div>
+    </aside>
+
+    <main class="main" id="main">
+      {% include "_flashes.html" %}
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+
+{% else %}
+  {# ── Public shell ─────────────────────────────────────────────────── #}
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('index') }}">{{ logo(24, '#0F8F72') }} MediAssist AI</a>
+    <nav aria-label="Main">
+      <a href="{{ url_for('login') }}">Sign in</a>
+      <a class="btn btn-primary" href="{{ url_for('register') }}">Create account</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    {% block public_flashes %}
+      <div style="max-width:1080px;margin:1.2rem auto 0;padding:0 1.6rem">
+        {% include "_flashes.html" %}
+      </div>
+    {% endblock %}
+    {% block public_content %}{% endblock %}
+  </main>
+
+  <footer class="site-foot">
+    <p>{{ app_name }} is an academic project. It matches described symptoms against a fixed
+       knowledge base and cannot diagnose you. Always consult a qualified doctor.</p>
+  </footer>
+{% endif %}
+
+<script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>
